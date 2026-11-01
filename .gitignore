@@ -1,0 +1,25 @@
+# dependencies and builds
+node_modules/
+dist/
+.venv/
+__pycache__/
+
+# environment
+.env
+.env.*
+
+# assets and data that are not part of this repository
+*.glb
+*.gltf
+*.drc
+*.tif
+*.tif.aux.xml
+frontend/public/textures/
+frontend/public/img/
+frontend/src/db/db.json
+tooling/data/
+tooling/output/
+
+# system
+.DS_Store
+*.log

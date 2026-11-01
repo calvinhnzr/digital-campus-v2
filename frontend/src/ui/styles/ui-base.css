@@ -1,0 +1,642 @@
+/* 
+ * UI Base Styles with CSS Relative Colors
+ * 
+ * Uses a single base color (--ui-base) and derives all other colors
+ * using CSS relative colors: https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Colors/Using_relative_colors
+ * 
+ * Modes: default, flat, glass
+ */
+
+/* ============================================
+   BASE COLOR DEFINITION & SIZING
+   ============================================ */
+
+:root {
+  /* Base color - the foundation for all UI colors (can be overridden via inline style) */
+  --ui-base: #c96c3d;
+
+  /* Badge/indicator dot color - can be overridden independently */
+  --ui-badge-bg: #22c55e;
+
+  /* Sizing */
+  --ui-size-item: 3.7rem;
+  --ui-size-sub-item: 2.4rem;
+  --ui-border-radius: 1.2rem;
+  --ui-border-radius-lg: 2rem;
+  --ui-border-radius-sm: 0.9rem;
+}
+
+/* ============================================
+   MODE: DEFAULT (base mode with shadows/borders)
+   ============================================ */
+
+.ui-mode-default {
+  /* Backgrounds - darker shades of base */
+  --ui-bg-darkest: oklch(from var(--ui-base) calc(l - 0.25) calc(c * 0.3) h);
+  --ui-bg-darker: oklch(from var(--ui-base) calc(l - 0.22) calc(c * 0.35) h);
+  --ui-bg-dark: oklch(from var(--ui-base) calc(l - 0.15) calc(c * 0.4) h);
+  --ui-bg-medium: oklch(from var(--ui-base) calc(l - 0.12) calc(c * 0.45) h);
+  --ui-bg-light: oklch(from var(--ui-base) calc(l - 0.08) calc(c * 0.5) h);
+
+  /* Active/Hover states */
+  --ui-active: oklch(from var(--ui-base) calc(l + 0.15) calc(c * 1.3) h);
+  --ui-hover: oklch(from var(--ui-base) calc(l + 0.1) calc(c * 1.2) h);
+
+  /* Borders */
+  --ui-border-dark: oklch(from var(--ui-base) calc(l - 0.1) calc(c * 0.5) h);
+  --ui-border: oklch(from var(--ui-base) calc(l - 0.05) calc(c * 0.6) h);
+  --ui-border-light: oklch(from var(--ui-base) calc(l + 0.05) calc(c * 0.7) h);
+  --ui-border-active: oklch(from var(--ui-base) calc(l + 0.25) calc(c * 1.2) h);
+
+  /* Text colors */
+  --ui-text-primary: oklch(from var(--ui-base) calc(l + 0.35) calc(c * 0.8) h);
+  --ui-text-secondary: oklch(from var(--ui-base) calc(l + 0.45) calc(c * 0.3) h);
+  --ui-text-muted: oklch(from var(--ui-base) calc(l + 0.1) calc(c * 0.4) h);
+  --ui-text-hover: oklch(from var(--ui-base) calc(l + 0.48) calc(c * 0.2) h);
+  --ui-text-label: oklch(from var(--ui-base) calc(l + 0.3) calc(c * 0.6) h);
+  --ui-text-label-muted: oklch(from var(--ui-base) calc(l + 0.25) calc(c * 0.5) h);
+
+  /* Shadows */
+  --ui-shadow-color: oklch(from var(--ui-base) calc(l - 0.4) calc(c * 0.2) h / 0.5);
+  --ui-shadow-glow: oklch(from var(--ui-base) calc(l + 0.2) calc(c * 1.2) h / 0.4);
+  --ui-shadow-inset: oklch(from var(--ui-base) calc(l + 0.3) calc(c * 0.8) h / 0.1);
+
+  /* Label border (for tooltips/labels) */
+  --ui-label-border: oklch(from var(--ui-base) calc(l - 0.05) calc(c * 0.4) h / 0.4);
+
+  /* Mode-specific variables */
+  --mode-bg: var(--ui-bg-dark);
+  --mode-bg-hover: var(--ui-bg-light);
+  --mode-bg-active: var(--ui-active);
+  --mode-bg-checked: oklch(from var(--ui-base) calc(l + 0.08) calc(c * 1.1) h);
+
+  --mode-border: 2px solid var(--ui-border);
+  --mode-border-hover: 2px solid var(--ui-border-light);
+  --mode-border-active: 2px solid var(--ui-border-active);
+  --mode-border-checked: 2px solid var(--ui-border-active);
+
+  --mode-shadow: 0px 4px 16px var(--ui-shadow-color), inset 0px 2px 4px var(--ui-shadow-inset);
+  --mode-shadow-hover:
+    0px 5px 16px var(--ui-shadow-glow), inset 0px 2px 4px oklch(from var(--ui-base) calc(l + 0.4) c h / 0.18);
+  --mode-shadow-active:
+    0px 8px 28px var(--ui-shadow-glow), inset 0px 2px 6px oklch(from var(--ui-base) calc(l + 0.4) c h / 0.2);
+
+  --mode-text: var(--ui-text-primary);
+  --mode-text-hover: var(--ui-text-hover);
+
+  --mode-transform-hover: translateY(-2px);
+  --mode-transform-active: scale(1.35);
+
+  --mode-backdrop: none;
+
+  /* List/Container specific */
+  --mode-list-bg: var(--ui-bg-darkest);
+  --mode-list-border: 2px solid var(--ui-border-dark);
+  --mode-list-shadow: 0px 8px 32px var(--ui-shadow-color), inset 0px 2px 8px var(--ui-shadow-inset);
+}
+
+/* ============================================
+   MODE: FLAT (minimal, no shadows/borders)
+   ============================================ */
+
+.ui-mode-flat {
+  /* Backgrounds - darker shades of base */
+  --ui-bg-darkest: oklch(from var(--ui-base) calc(l - 0.25) calc(c * 0.3) h);
+  --ui-bg-darker: oklch(from var(--ui-base) calc(l - 0.22) calc(c * 0.35) h);
+  --ui-bg-dark: oklch(from var(--ui-base) calc(l - 0.15) calc(c * 0.4) h);
+  --ui-bg-medium: oklch(from var(--ui-base) calc(l - 0.12) calc(c * 0.45) h);
+  --ui-bg-light: oklch(from var(--ui-base) calc(l - 0.08) calc(c * 0.5) h);
+
+  /* Active/Hover states */
+  --ui-active: oklch(from var(--ui-base) calc(l + 0.15) calc(c * 1.3) h);
+  --ui-hover: oklch(from var(--ui-base) calc(l + 0.1) calc(c * 1.2) h);
+
+  /* Text colors */
+  --ui-text-primary: oklch(from var(--ui-base) calc(l + 0.35) calc(c * 0.8) h);
+  --ui-text-secondary: oklch(from var(--ui-base) calc(l + 0.45) calc(c * 0.3) h);
+  --ui-text-muted: oklch(from var(--ui-base) calc(l + 0.1) calc(c * 0.4) h);
+  --ui-text-label: oklch(from var(--ui-base) calc(l + 0.3) calc(c * 0.6) h);
+  --ui-text-label-muted: oklch(from var(--ui-base) calc(l + 0.25) calc(c * 0.5) h);
+
+  /* Mode-specific variables */
+  --mode-bg: var(--ui-bg-dark);
+  --mode-bg-hover: var(--ui-bg-light);
+  --mode-bg-active: var(--ui-active);
+  --mode-bg-checked: oklch(from var(--ui-base) calc(l + 0.08) calc(c * 1.1) h);
+
+  --mode-border: none;
+  --mode-border-hover: none;
+  --mode-border-active: none;
+  --mode-border-checked: none;
+
+  --mode-shadow: none;
+  --mode-shadow-hover: none;
+  --mode-shadow-active: none;
+
+  --mode-text: var(--ui-text-primary);
+  --mode-text-hover: var(--ui-text-hover);
+
+  --mode-transform-hover: none;
+  --mode-transform-active: scale(1.35);
+
+  --mode-backdrop: none;
+
+  /* List/Container specific */
+  --mode-list-bg: var(--ui-bg-darkest);
+  --mode-list-border: none;
+  --mode-list-shadow: none;
+}
+
+/* ============================================
+   MODE: GLASS (glassmorphism with blur)
+   ============================================ */
+
+.ui-mode-glass {
+  /* Backgrounds - darker shades of base */
+  --ui-bg-darkest: oklch(from var(--ui-base) calc(l - 0.25) calc(c * 0.3) h);
+  --ui-bg-darker: oklch(from var(--ui-base) calc(l - 0.22) calc(c * 0.35) h);
+  --ui-bg-dark: oklch(from var(--ui-base) calc(l - 0.15) calc(c * 0.4) h);
+
+  /* Active/Hover states */
+  --ui-active: oklch(from var(--ui-base) calc(l + 0.15) calc(c * 1.3) h);
+
+  /* Borders */
+  --ui-border-dark: oklch(from var(--ui-base) calc(l - 0.1) calc(c * 0.5) h);
+  --ui-border-active: oklch(from var(--ui-base) calc(l + 0.25) calc(c * 1.2) h);
+
+  /* Text colors */
+  --ui-text-primary: oklch(from var(--ui-base) calc(l + 0.35) calc(c * 0.8) h);
+  --ui-text-secondary: oklch(from var(--ui-base) calc(l + 0.45) calc(c * 0.3) h);
+  --ui-text-muted: oklch(from var(--ui-base) calc(l + 0.1) calc(c * 0.4) h);
+  --ui-text-label: oklch(from var(--ui-base) calc(l + 0.3) calc(c * 0.6) h);
+  --ui-text-label-muted: oklch(from var(--ui-base) calc(l + 0.25) calc(c * 0.5) h);
+
+  /* Shadows */
+  --ui-shadow-glow: oklch(from var(--ui-base) calc(l + 0.2) calc(c * 1.2) h / 0.4);
+
+  /* Label border (for tooltips/labels) */
+  --ui-label-border: oklch(from var(--ui-base) calc(l - 0.05) calc(c * 0.4) h / 0.4);
+
+  /* Mode-specific variables */
+  --mode-bg: oklch(from var(--ui-base) calc(l - 0.2) calc(c * 0.3) h / 0.8);
+  --mode-bg-hover: oklch(from var(--ui-base) calc(l - 0.15) calc(c * 0.35) h / 0.85);
+  --mode-bg-active: oklch(from var(--ui-base) calc(l + 0.15) calc(c * 1.2) h / 0.45);
+  --mode-bg-checked: oklch(from var(--ui-base) calc(l + 0.1) calc(c * 1.1) h / 0.6);
+
+  --mode-border: 1.5px solid oklch(from var(--ui-base) calc(l + 0.2) calc(c * 1.1) h / 0.25);
+  --mode-border-hover: 1.5px solid oklch(from var(--ui-base) calc(l + 0.25) calc(c * 1.2) h / 0.35);
+  --mode-border-active: 1.5px solid oklch(from var(--ui-base) calc(l + 0.3) calc(c * 1.3) h / 0.65);
+  --mode-border-checked: 1.5px solid oklch(from var(--ui-base) calc(l + 0.3) calc(c * 1.3) h / 0.75);
+
+  --mode-shadow: 0px 4px 16px oklch(0% 0 0 / 0.3), inset 0px 1px 2px oklch(from var(--ui-base) calc(l + 0.2) c h / 0.1);
+  --mode-shadow-hover:
+    0px 5px 16px oklch(from var(--ui-base) calc(l + 0.25) calc(c * 1.2) h / 0.3),
+    inset 0px 1px 3px oklch(from var(--ui-base) calc(l + 0.35) c h / 0.15);
+  --mode-shadow-active:
+    0px 8px 28px oklch(from var(--ui-base) calc(l + 0.25) calc(c * 1.2) h / 0.5),
+    inset 0px 2px 4px oklch(from var(--ui-base) calc(l + 0.35) c h / 0.15);
+
+  --mode-text: var(--ui-text-primary);
+  --mode-text-hover: oklch(from var(--ui-base) calc(l + 0.35) calc(c * 1.3) h);
+
+  --mode-transform-hover: translateY(-2px);
+  --mode-transform-active: scale(1.35);
+
+  --mode-backdrop: blur(10px);
+
+  /* List/Container specific */
+  --mode-list-bg: oklch(from var(--ui-base) calc(l - 0.25) calc(c * 0.25) h / 0.6);
+  --mode-list-border: 1px solid oklch(from var(--ui-base) calc(l + 0.2) calc(c * 1.1) h / 0.15);
+  --mode-list-shadow:
+    0px 8px 32px oklch(0% 0 0 / 0.4), inset 0px 2px 4px oklch(from var(--ui-base) calc(l + 0.2) c h / 0.05);
+}
+
+/* ============================================
+   BASE COMPONENTS
+   ============================================ */
+
+/* Container/List */
+.ui-list {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  padding: 0.8rem 1.2rem;
+  background: var(--mode-list-bg);
+  backdrop-filter: var(--mode-backdrop);
+  -webkit-backdrop-filter: var(--mode-backdrop);
+  border-radius: var(--ui-border-radius-lg);
+  border: var(--mode-list-border);
+  box-shadow: var(--mode-list-shadow);
+  will-change: transform;
+  transition: gap 0.2s ease;
+}
+
+/* Base Item */
+.ui-item {
+  width: var(--ui-size-item);
+  height: var(--ui-size-item);
+  background: var(--mode-bg);
+  backdrop-filter: var(--mode-backdrop);
+  -webkit-backdrop-filter: var(--mode-backdrop);
+  border-radius: var(--ui-border-radius);
+  border: var(--mode-border);
+  box-shadow: var(--mode-shadow);
+  color: var(--mode-text);
+  font-weight: 500;
+  cursor: pointer;
+  position: relative;
+  will-change: transform;
+  transform-origin: bottom;
+  transition:
+    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    margin 0.3s ease,
+    background 0.25s,
+    border 0.25s,
+    box-shadow 0.25s;
+}
+
+.ui-item:hover {
+  background: var(--mode-bg-hover);
+  border: var(--mode-border-hover);
+  box-shadow: var(--mode-shadow-hover);
+  color: var(--mode-text-hover);
+  transform: var(--mode-transform-hover);
+}
+
+.ui-item.active {
+  background: var(--mode-bg-active);
+  border: var(--mode-border-active);
+  box-shadow: var(--mode-shadow-active);
+  transform: var(--mode-transform-active);
+  margin: 0 0.6rem;
+  z-index: 20;
+}
+
+/* When item has a selection (checked child), show checked styling but normal size */
+.ui-item.has-selection {
+  background: var(--mode-bg-checked);
+  border: var(--mode-border-checked);
+}
+
+/* When hovering/active item with selection, scale up and show active styling */
+.ui-item.has-selection:hover,
+.ui-item.active.has-selection {
+  background: var(--mode-bg-active);
+  border: var(--mode-border-active);
+  box-shadow: var(--mode-shadow-active);
+  transform: var(--mode-transform-active);
+  margin: 0 0.6rem;
+}
+
+.ui-item:has(input:checked) {
+  background: var(--mode-bg-checked);
+  border: var(--mode-border-checked);
+}
+
+.ui-item.checked,
+.ui-item:has(input:checked) {
+  background: var(--mode-bg-checked);
+  border: var(--mode-border-checked);
+}
+
+.ui-item.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ui-item.greyed-out {
+  opacity: 0.5;
+}
+
+/* Item Label */
+.ui-item-label {
+  font-size: 1.25rem;
+  text-align: center;
+  pointer-events: none;
+  color: var(--mode-text);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.ui-mode-default .ui-item-label,
+.ui-mode-glass .ui-item-label {
+  text-shadow: 0px 1px 4px oklch(0% 0 0 / 0.4);
+}
+
+.ui-mode-flat .ui-item-label {
+  text-shadow: none;
+}
+
+/* Input (search) */
+.ui-input {
+  width: 18rem;
+  padding: 0.75rem 1.25rem;
+  background: var(--mode-bg);
+  backdrop-filter: var(--mode-backdrop);
+  -webkit-backdrop-filter: var(--mode-backdrop);
+  border-radius: var(--ui-border-radius);
+  font-size: 1rem;
+  color: var(--mode-text);
+  font-weight: 500;
+  border: var(--mode-border);
+  box-shadow: var(--mode-shadow);
+  outline: none;
+  cursor: pointer;
+  transition:
+    background 0.25s,
+    border 0.25s,
+    box-shadow 0.25s,
+    transform 0.2s ease,
+    opacity 0.25s;
+}
+
+.ui-input::placeholder {
+  color: var(--ui-text-muted);
+  font-weight: 400;
+}
+
+.ui-input:focus {
+  background: var(--mode-bg-hover);
+  border: var(--mode-border-active);
+  color: var(--ui-text-secondary);
+  box-shadow: var(--mode-shadow-hover);
+}
+
+.ui-mode-default .ui-input:focus,
+.ui-mode-glass .ui-input:focus {
+  transform: translateY(-2px);
+}
+
+.ui-input:hover:not(:focus) {
+  background: var(--mode-bg-hover);
+  border: var(--mode-border-hover);
+}
+
+.ui-input.greyed-out {
+  opacity: 0.5;
+}
+
+/* Button */
+.ui-button {
+  width: var(--ui-size-item);
+  height: var(--ui-size-item);
+  background: var(--mode-bg);
+  backdrop-filter: var(--mode-backdrop);
+  -webkit-backdrop-filter: var(--mode-backdrop);
+  border-radius: var(--ui-border-radius);
+  border: var(--mode-border);
+  box-shadow: var(--mode-shadow);
+  outline: none;
+  cursor: pointer;
+  color: var(--mode-text);
+  font-weight: 500;
+  position: relative;
+  will-change: transform;
+  transform-origin: bottom;
+  transition:
+    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    margin 0.3s ease,
+    background 0.25s,
+    border 0.25s,
+    box-shadow 0.25s;
+}
+
+.ui-button:hover {
+  background: var(--mode-bg-hover);
+  border: var(--mode-border-hover);
+  color: var(--mode-text-hover);
+}
+
+.ui-button.active {
+  background: var(--mode-bg-active);
+  border: var(--mode-border-active);
+  box-shadow: var(--mode-shadow-active);
+  transform: var(--mode-transform-active);
+  margin: 0 0.6rem;
+  z-index: 20;
+  color: var(--ui-text-secondary);
+}
+
+.ui-button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: var(--ui-bg-darker);
+  color: var(--ui-text-muted);
+}
+
+.ui-button.disabled:hover {
+  background: var(--ui-bg-darker);
+  border: var(--mode-border);
+  color: var(--ui-text-muted);
+}
+
+/* Badge indicator */
+.ui-button.has-badge::after,
+.ui-item.has-badge::after {
+  content: "";
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 0.7rem;
+  height: 0.7rem;
+  background: var(--ui-badge-bg);
+  border: 2px solid oklch(from var(--ui-badge-bg) calc(l + 0.1) c h);
+  box-shadow: 0px 6px 20px oklch(from var(--ui-badge-bg) l c h / 0.5);
+  border-radius: 50%;
+}
+
+/* Sub-list (dropdown menu) */
+.ui-sub-list {
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  transform: translateX(-50%) translateY(-1rem);
+  display: flex;
+  flex-direction: row;
+  gap: 0.7rem;
+  border-radius: 1.5rem;
+  min-width: 6rem;
+  z-index: 30;
+  padding: 0.6rem 0.8rem 2rem 0.8rem;
+  background: var(--mode-list-bg);
+  backdrop-filter: var(--mode-backdrop);
+  -webkit-backdrop-filter: var(--mode-backdrop);
+  border: var(--mode-list-border);
+  box-shadow: var(--mode-list-shadow);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 0.2s ease,
+    visibility 0.2s ease;
+  transform-origin: bottom center;
+}
+
+.ui-sub-list.visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* Sub-item */
+.ui-sub-item {
+  width: var(--ui-size-sub-item);
+  height: var(--ui-size-sub-item);
+  border-radius: var(--ui-border-radius-sm);
+  background: var(--mode-bg);
+  backdrop-filter: var(--mode-backdrop);
+  -webkit-backdrop-filter: var(--mode-backdrop);
+  border: var(--mode-border);
+  box-shadow: var(--mode-shadow);
+  cursor: pointer;
+  position: relative;
+  transition:
+    background 0.2s,
+    border 0.2s,
+    box-shadow 0.2s,
+    transform 0.2s;
+}
+
+.ui-sub-item:hover {
+  background: var(--mode-bg-hover);
+  border: var(--mode-border-hover);
+  box-shadow: var(--mode-shadow-hover);
+}
+
+.ui-sub-item:has(input:checked),
+.ui-sub-item.checked {
+  background: var(--mode-bg-checked);
+  border: var(--mode-border-checked);
+}
+
+/* Floor item (circular variant) */
+.ui-floor-item {
+  width: var(--ui-size-item);
+  height: var(--ui-size-item);
+  border-radius: 50%;
+  background: var(--mode-bg);
+  backdrop-filter: var(--mode-backdrop);
+  -webkit-backdrop-filter: var(--mode-backdrop);
+  border: var(--mode-border);
+  box-shadow: var(--mode-shadow);
+  cursor: pointer;
+  position: relative;
+  list-style: none;
+  transition:
+    background 0.25s,
+    border 0.25s,
+    box-shadow 0.25s,
+    transform 0.2s ease;
+}
+
+.ui-floor-item:hover:not(.greyed-out) {
+  background: var(--mode-bg-active);
+  border: var(--mode-border-active);
+  box-shadow: var(--mode-shadow-hover);
+}
+
+.ui-mode-default .ui-floor-item:hover:not(.greyed-out),
+.ui-mode-glass .ui-floor-item:hover:not(.greyed-out) {
+  transform: translateY(-2px);
+}
+
+.ui-floor-item:has(input:checked) {
+  background: var(--mode-bg-checked);
+  border: var(--mode-border-checked);
+}
+
+.ui-floor-item.greyed-out {
+  opacity: 0.5;
+}
+
+.ui-floor-item > label {
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.ui-floor-item input[type="radio"] {
+  display: none;
+}
+
+/* Label tooltip style */
+.ui-label-tooltip {
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: capitalize;
+  font-family:
+    "Arial Narrow", "Roboto Condensed", "Helvetica Neue Condensed", "HelveticaNeue-CondensedBold", sans-serif-condensed,
+    sans-serif;
+  letter-spacing: 0.1em;
+  color: oklch(from var(--ui-base) calc(l + 0.3) calc(c * 0.6) h);
+  white-space: nowrap;
+  pointer-events: none;
+  padding: 0.25rem 0.5rem;
+  background: var(--ui-bg-darker);
+  border-radius: 0.5rem;
+  z-index: 40;
+}
+
+.ui-mode-default .ui-label-tooltip,
+.ui-mode-glass .ui-label-tooltip {
+  text-shadow: 0px 1px 2px oklch(0% 0 0 / 0.3);
+  border: 1px solid oklch(from var(--ui-base) calc(l - 0.05) calc(c * 0.4) h / 0.4);
+  box-shadow: 0px 2px 8px oklch(0% 0 0 / 0.25);
+}
+
+.ui-mode-flat .ui-label-tooltip {
+  text-shadow: none;
+  border: none;
+  box-shadow: 0px 1px 4px oklch(0% 0 0 / 0.15);
+}
+
+/* Tooltip tail */
+.ui-label-tooltip::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 8px;
+  height: 8px;
+  background: var(--ui-bg-darker);
+  border-radius: 0 0 2px 0;
+}
+
+/* Divider */
+.ui-divider {
+  width: 2px;
+  height: calc(var(--ui-size-item) * 0.6);
+  background: var(--ui-border-dark);
+  border-radius: 1px;
+  align-self: center;
+}
+
+.ui-mode-glass .ui-divider {
+  background: oklch(from var(--ui-base) calc(l + 0.2) calc(c * 1.1) h / 0.2);
+}
+
+.ui-mode-flat .ui-divider {
+  background: oklch(from var(--ui-base) calc(l + 0) calc(c * 0.5) h);
+}
+
+/* Marker/indicator dot */
+.ui-marker {
+  content: "";
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 0.7rem;
+  height: 0.7rem;
+  background: var(--ui-badge-bg);
+  border: 2px solid oklch(from var(--ui-badge-bg) calc(l + 0.1) c h);
+  box-shadow: 0px 6px 20px oklch(from var(--ui-badge-bg) l c h / 0.5);
+  border-radius: 50%;
+}

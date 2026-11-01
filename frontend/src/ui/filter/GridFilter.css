@@ -1,0 +1,136 @@
+/* GridFilter Component Styles */
+
+/* Accessibility sub-grid (dropdown grid layout) */
+.ui-accessibility-grid {
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  transform: translateX(-50%) translateY(-1rem);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  border-radius: 1.5rem;
+  min-width: 8rem;
+  z-index: 30;
+  padding: 0.8rem 0.8rem 2.5rem 0.8rem;
+  background: var(--mode-list-bg);
+  backdrop-filter: var(--mode-backdrop);
+  -webkit-backdrop-filter: var(--mode-backdrop);
+  border: var(--mode-list-border);
+  box-shadow: var(--mode-list-shadow);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 0.2s ease,
+    visibility 0.2s ease;
+  transform-origin: bottom center;
+}
+
+.ui-accessibility-grid.visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.ui-accessibility-grid.no-transition {
+  transition: none;
+}
+
+/* Grid sub-item */
+.ui-grid-sub-item {
+  width: var(--ui-size-sub-item);
+  height: var(--ui-size-sub-item);
+  border-radius: var(--ui-border-radius-sm);
+  background: var(--mode-bg);
+  backdrop-filter: var(--mode-backdrop);
+  -webkit-backdrop-filter: var(--mode-backdrop);
+  border: var(--mode-border);
+  box-shadow: var(--mode-shadow);
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background 0.2s,
+    border 0.2s,
+    box-shadow 0.2s,
+    transform 0.2s;
+}
+
+.ui-grid-sub-item:hover,
+.ui-grid-sub-item.hovered {
+  background: var(--mode-bg-hover);
+  border: var(--mode-border-hover);
+  box-shadow: var(--mode-shadow-hover);
+}
+
+.ui-grid-sub-item.selected,
+.ui-grid-sub-item:has(input:checked) {
+  background: var(--mode-bg-checked);
+  border: var(--mode-border-checked);
+}
+
+.ui-grid-sub-item input[type="radio"] {
+  display: none;
+}
+
+/* Grid item label (below each grid sub-item) */
+.ui-grid-item-label {
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: capitalize;
+  font-family:
+    "Arial Narrow", "Roboto Condensed", "Helvetica Neue Condensed", "HelveticaNeue-CondensedBold", sans-serif-condensed,
+    sans-serif;
+  letter-spacing: 0.08em;
+  color: var(--ui-text-label-muted);
+  white-space: nowrap;
+  pointer-events: none;
+  text-align: center;
+}
+
+.ui-mode-default .ui-grid-item-label,
+.ui-mode-glass .ui-grid-item-label {
+  text-shadow: 0px 1px 2px oklch(0% 0 0 / 0.3);
+}
+
+.ui-mode-flat .ui-grid-item-label {
+  text-shadow: none;
+}
+
+/* Grid parent label (at bottom of grid) */
+.ui-grid-parent-label {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: capitalize;
+  font-family:
+    "Arial Narrow", "Roboto Condensed", "Helvetica Neue Condensed", "HelveticaNeue-CondensedBold", sans-serif-condensed,
+    sans-serif;
+  letter-spacing: 0.1em;
+  color: var(--ui-text-label);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.ui-mode-default .ui-grid-parent-label,
+.ui-mode-glass .ui-grid-parent-label {
+  text-shadow: 0px 1px 2px oklch(0% 0 0 / 0.3);
+}
+
+.ui-mode-flat .ui-grid-parent-label {
+  text-shadow: none;
+}
+
+/* Grid item wrapper */
+.ui-grid-item-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
